@@ -63,4 +63,20 @@ public class PlayerMovement : MonoBehaviour
         }
         pOldPos = player.transform.position;
     }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("CameraMove"))
+        {
+            if(player.transform.position.x>=18)
+            {
+                Camera.main.transform.position = new Vector3(21f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            }
+            if(player.transform.position.x<=16)
+            {
+                Camera.main.transform.position = new Vector3(8.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            }
+        }
+    }
 }
