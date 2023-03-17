@@ -7,10 +7,10 @@ public class MapGenerator : MonoBehaviour
     public GameObject block;
     public const int sizeX = 34;
     const int sizeY = 19;
-
+    
     [SerializeField]
     public Blocks[,] myGrid = new Blocks[sizeX, sizeY];
-
+    
     void Awake()
     {
         InizializeMatrix();
@@ -33,18 +33,24 @@ public class MapGenerator : MonoBehaviour
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Boundary;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
+            var NewObjName = myGrid[x,y];
+            NewObjName.name = "Boundary";
         }
         else if (y == 0 || y == sizeY - 1)
         {
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Boundary;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
+            var NewObjName = myGrid[x, y];
+            NewObjName.name = "Boundary";
         }
         else if (x % 3 == 0 && y % 3 == 0 && x != 0 && y != 0 && x != sizeX - 1 && y != sizeY - 1)
         {
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Default;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
+            var NewObjName = myGrid[x, y];
+            NewObjName.name = "Default";
         }
         else if (y == 17 && (x == 10||x == 11||x == 16||x == 17 ||x == 28)||
                 y == 16 && (x == 11||x == 16||x == 21||x == 28)||
@@ -67,12 +73,16 @@ public class MapGenerator : MonoBehaviour
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Destructible;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
+            var NewObjName = myGrid[x, y];
+            NewObjName.name = "Destructible";
         }
         else if(x==26&&y==3)
         {
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Door;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
+            var NewObjName = myGrid[x, y];
+            NewObjName.name = "Door";
         }
     }
     void InstBlock(int c, int r)
@@ -80,11 +90,13 @@ public class MapGenerator : MonoBehaviour
         GameObject tmp = Instantiate(block);
         tmp.transform.SetParent(this.transform);
         tmp.transform.localPosition = new Vector3(c, r, 0);
-        tmp.name = c + " : " + r;
+        //tmp.name = c + " : " + r;
         Blocks blockTmp = tmp.GetComponentInChildren<Blocks>();
 
+        //block.name = " " + myGrid[x, y].type;
         blockTmp.pos = new Vector2(c, r);
         myGrid[c, r] = blockTmp;
+        //tmp.name = " " + myGrid[c,r].type;
     }
 
 }

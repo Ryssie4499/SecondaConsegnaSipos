@@ -21,14 +21,14 @@ public class Blocks : MonoBehaviour
     public Color[] blockColors = new Color[enumSize];
     void Awake()                
     {
-        InitializeBlock();
+        //InitializeBlock();
     }
 
-    void InitializeBlock()
-    {
-        type = (BlockType)Random.Range(0, 5);
-        //ms.material.color = blockColors[(int)type];
+    //void InitializeBlock()
+    //{
+    //    type = (BlockType)Random.Range(0, 5);
+    //    //ms.material.color = blockColors[(int)type];
 
-        //ms.material.color = Color.white;
-    }
+    //    //ms.material.color = Color.white;
+    //}
 }
