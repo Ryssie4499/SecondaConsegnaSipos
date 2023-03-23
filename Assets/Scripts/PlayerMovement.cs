@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] float playerSpeed = 20f;
-    [SerializeField] float boundaryHeight = 17f;
+    [SerializeField] float boundaryHeight = 32f;
     [SerializeField] float boundaryWeight = 32f;
     Rigidbody rb;
     Vector2 pOldPos;
@@ -77,6 +77,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 Camera.main.transform.position = new Vector3(8.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            Debug.Log("You Died!");
         }
     }
 }

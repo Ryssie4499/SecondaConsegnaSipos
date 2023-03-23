@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public float timer;
+    [SerializeField] GameObject Explosion;
     [SerializeField] float weaponRange = 1;
     private const string Dest = "Destructible";
     private const string Door = "Door";
@@ -19,15 +20,22 @@ public class Bomb : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer>=2.5f && timer<=3f)
+        if (timer >= 2.2f && timer <= 2.5f)
+            Explosion.SetActive(true);
+        else
+            Explosion.SetActive(false);
+        if(timer>=2.5f && timer<=2.8f)
         {
             RaycastHit hit;
-
             if (Physics.Raycast(transform.position, transform.right, out hit, weaponRange))
             {
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                }
+                else if(hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("You Died!");
                 }
                 Debug.DrawRay(transform.position, transform.right * weaponRange, Color.red, 1);
             }
@@ -38,6 +46,10 @@ public class Bomb : MonoBehaviour
                 {
                     Destroy(hit.transform.gameObject);
                 }
+                else if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("You Died!");
+                }
                 Debug.DrawRay(transform.position, -transform.right * weaponRange, Color.red, 1);
             }
 
@@ -47,6 +59,10 @@ public class Bomb : MonoBehaviour
                 {
                     Destroy(hit.transform.gameObject);
                 }
+                else if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("You Died!");
+                }
                 Debug.DrawRay(transform.position, transform.up * weaponRange, Color.red, 1);
             }
 
@@ -55,6 +71,10 @@ public class Bomb : MonoBehaviour
                 if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                }
+                else if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("You Died!");
                 }
                 Debug.DrawRay(transform.position, -transform.up * weaponRange, Color.red, 1);
             }

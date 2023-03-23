@@ -6,7 +6,7 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject block;
     public const int sizeX = 34;
-    const int sizeY = 19;
+    const int sizeY = 34;
     
     [SerializeField]
     public Blocks[,] myGrid = new Blocks[sizeX, sizeY];
@@ -52,37 +52,20 @@ public class MapGenerator : MonoBehaviour
             var NewObjName = myGrid[x, y];
             NewObjName.name = "Default";
         }
-        else if (y == 17 && (x == 10||x == 11||x == 16||x == 17 ||x == 28)||
-                y == 16 && (x == 11||x == 16||x == 21||x == 28)||
-                y == 15 && (x == 5|| x == 11||x == 16||x == 20||x == 28||x == 31)||
-                y == 14 && ((x >= 6 && x <= 9)||(x > 10 && x < 15)||x == 16||(x >= 22 && x < 25)||(x >= 28 && x < 32))||
-                y == 13 && (x == 3||x == 5||x == 6||x == 16||x == 17||x == 19||x == 21||x == 22||x == 26||x == 27||x == 28||x == 31||x == 32)||
-                y == 12 && (x == 4||x == 5||x == 13||x == 14||x == 16||x == 19||x == 20||x == 25||x == 26)||
-                y == 11 && (x == 8||x == 11||x == 15||x == 16||x == 25||x == 26) ||
-                y == 10 && (x == 3||x == 4||(x >= 6 && x <= 8)|| x == 11||(x >= 20 && x <= 22)||(x >= 26 && x <= 28)||(x >= 30 && x <= 32))||
-                y == 9 && (x == 4||x == 10||x == 11||x == 13||x == 16||x == 17||x == 19||x == 20||x == 22||x == 28)||
-                y == 8 && ((x >= 1 && x <= 4)||x == 13||x == 14||(x >= 17 && x <= 19)||x == 22||x == 28)||
-                y == 7 && ((x >= 6 && x <= 10)||(x >= 25 && x <= 28)||(x >= 30 && x <= 32))||
-                y == 6 && (x == 4||x == 10||x == 14||x == 22||x == 23||x == 26)||
-                y == 5 && (x == 4||(x >= 7 && x <= 10)||x == 12||x == 14||x == 23||x == 26||x == 30)||
-                y == 4 && (x == 4||x == 7||x == 12||(x >= 14 && x <= 18)||(x >= 21 && x <= 23)||(x >= 25 && x <= 28)||x == 30)||
-                y == 3 && (x == 4||x == 7||x == 11||x == 16||x == 17||x == 25||x == 28)||
-                y == 2 && (x == 6||x == 7||x == 11||x == 17||x == 25)||
-                y == 1 && (x == 6||x == 11||x == 12||x == 25))
+        else if ((y == (int)(Mathf.Sin(2 * x) + 10) * 2 ||
+            y == (int)(Mathf.Sin(2 * x) + 4) * 4||
+            y == (int)(Mathf.Cos(2 * x) + 2) * 8||
+            y == (int)(Mathf.Cos(2 * x) + 14) * 2||
+            x == (int)(Mathf.Sin(2 * y) + 10) * 2||
+            x == (int)(Mathf.Sin(2 * y) + 4) * 4||
+            x == (int)(Mathf.Cos(2 * y) + 2) * 8||
+            x == (int)(Mathf.Cos(2 * y) + 14) * 2))
         {
             InstBlock(x, y);
             myGrid[x, y].type = BlockType.Destructible;
             myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
             var NewObjName = myGrid[x, y];
             NewObjName.name = "Destructible";
-        }
-        else if(x==26&&y==3)
-        {
-            InstBlock(x, y);
-            myGrid[x, y].type = BlockType.Door;
-            myGrid[x, y].ms.material.color = myGrid[x, y].blockColors[(int)myGrid[x, y].type];
-            var NewObjName = myGrid[x, y];
-            NewObjName.name = "Door";
         }
     }
     void InstBlock(int c, int r)

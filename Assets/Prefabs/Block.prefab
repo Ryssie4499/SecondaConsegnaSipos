@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d825193e793a8034a8040121a6310a2a, type: 2}
+  - {fileID: 2100000, guid: c58cbd8c99be00c4ca21bb0156db3e48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,11 +130,10 @@ MonoBehaviour:
   ms: {fileID: 3393273809702436795}
   type: 0
   blockColors:
-  - {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0}
-  - {r: 0.16981131, g: 0.16901031, b: 0.16901031, a: 0}
-  - {r: 1, g: 0.8217412, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 0}
   - {r: 0, g: 1, b: 0.114498615, a: 0}
-  - {r: 0.26415092, g: 0.095941596, b: 0.095941596, a: 0}
+  - {r: 0, g: 0.7075472, b: 0.22292581, a: 0}
 --- !u!65 &6565118003692008154
 BoxCollider:
   m_ObjectHideFlags: 0

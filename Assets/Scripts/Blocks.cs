@@ -5,14 +5,13 @@ using UnityEngine;
 public enum BlockType
 {
     Default,    //fatto
-    Boundary,   //fatto
-    Door,       
+    Boundary,   //fatto       
     PowerUp,
     Destructible
 }
 public class Blocks : MonoBehaviour
 {
-    const int enumSize = 5;
+    const int enumSize = 4;
     public Vector2 pos;
     public MeshRenderer ms;
 
