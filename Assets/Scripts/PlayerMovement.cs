@@ -11,12 +11,10 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     Vector2 pOldPos;
     Vector2 movementDirection;
-    //Vector2 curPos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //curPos = transform.position;
     }
 
 
@@ -26,24 +24,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void MovePlayer()
     {
+        Mathf.RoundToInt(gameObject.transform.position.x);
+        Mathf.RoundToInt(gameObject.transform.position.y);
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //if (transform.position.x % 0.5f == 0 && transform.position.y % 0.5f == 0)
-        //{
-            movementDirection = new Vector2(horizontal, vertical);
-            rb.velocity = movementDirection * playerSpeed;
-        //}
-        //else
-        //{
-        //    float num1 = Mathf.Round(transform.position.x);
-        //    float num2 = num1 + (num1 / 10);
-        //    curPos.x = num2;
-
-        //    float n1 = Mathf.Round(transform.position.y);
-        //    float n2 = n1 + (n1 / 10);
-        //    curPos.y = n2;
-        //}
+        movementDirection = new Vector2(horizontal, vertical);
+        rb.velocity = movementDirection * playerSpeed;
 
         if (player.transform.position.y > boundaryHeight)
         {
@@ -67,13 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("CameraMove"))
+        if (other.CompareTag("CameraMove"))
         {
-            if(player.transform.position.x>=18)
+            if (player.transform.position.x >= 18)
             {
                 Camera.main.transform.position = new Vector3(21f, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
-            if(player.transform.position.x<=16)
+            if (player.transform.position.x <= 16)
             {
                 Camera.main.transform.position = new Vector3(8.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
             }
@@ -81,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             Debug.Log("You Died!");
         }

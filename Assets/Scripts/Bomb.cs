@@ -8,7 +8,6 @@ public class Bomb : MonoBehaviour
     [SerializeField] GameObject Explosion;
     [SerializeField] float weaponRange = 1;
     private const string Dest = "Destructible";
-    private const string Door = "Door";
     private const string P = "PowerUp";
     private const string E = "Enemy";
     MapGenerator mG;
@@ -29,7 +28,7 @@ public class Bomb : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.right, out hit, weaponRange))
             {
-                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
+                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
                 }
@@ -42,7 +41,7 @@ public class Bomb : MonoBehaviour
 
             if (Physics.Raycast(transform.position, -transform.right, out hit, weaponRange))
             {
-                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
+                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
                 }
@@ -55,7 +54,7 @@ public class Bomb : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.up, out hit, weaponRange))
             {
-                if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
+                if (hit.transform.name == E || hit.transform.name == Dest|| hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
                 }
@@ -68,7 +67,7 @@ public class Bomb : MonoBehaviour
 
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponRange))
             {
-                if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == Door || hit.transform.name == P)
+                if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
                 }
