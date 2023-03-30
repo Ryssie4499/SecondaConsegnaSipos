@@ -245,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 287694836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 32, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1313641478}
   - {fileID: 288115221}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 287694836}
-  playerSpeed: 16
+  playerSpeed: 20
   boundaryHeight: 32
   boundaryWeight: 32
 --- !u!65 &287694839
@@ -295,7 +295,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 1
 --- !u!114 &287694841
@@ -338,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 288115220}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.156, z: -0.17}
-  m_LocalScale: {x: 2.5, y: 4, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 287694837}
   m_RootOrder: 1

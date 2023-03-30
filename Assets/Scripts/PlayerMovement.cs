@@ -5,32 +5,49 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] float playerSpeed = 20f;
+    [SerializeField] int playerSpeed = 20;
     [SerializeField] float boundaryHeight = 32f;
     [SerializeField] float boundaryWeight = 32f;
     Rigidbody rb;
     Vector2 pOldPos;
     Vector2 movementDirection;
+    Vector2 curPos;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
 
     void Update()
     {
+        //curPos = gameObject.transform.position;
         MovePlayer();
+
+        //curPos.x = Mathf.RoundToInt(curPos.x);
+        //curPos.y = Mathf.RoundToInt(curPos.y);
+
     }
     private void MovePlayer()
     {
         Mathf.RoundToInt(gameObject.transform.position.x);
         Mathf.RoundToInt(gameObject.transform.position.y);
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        int horizontal = (int)Input.GetAxisRaw("Horizontal");
+        int vertical = (int)Input.GetAxisRaw("Vertical");
 
-        movementDirection = new Vector2(horizontal, vertical);
-        rb.velocity = movementDirection * playerSpeed;
+            movementDirection = new Vector2(horizontal, vertical);
+            rb.velocity = movementDirection * playerSpeed;
+
+        Mathf.RoundToInt(gameObject.transform.position.x);
+        Mathf.RoundToInt(gameObject.transform.position.y);
+
+
+        //rb.MovePosition(transform.position + movementDirection * Time.deltaTime * playerSpeed);
+
+
+
 
         if (player.transform.position.y > boundaryHeight)
         {
