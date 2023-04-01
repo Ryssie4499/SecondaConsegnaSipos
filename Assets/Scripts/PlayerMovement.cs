@@ -1,93 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] GameObject player;
-    [SerializeField] int playerSpeed = 20;
-    [SerializeField] float boundaryHeight = 32f;
-    [SerializeField] float boundaryWeight = 32f;
-    Rigidbody rb;
-    Vector2 pOldPos;
-    Vector2 movementDirection;
-    Vector2 curPos;
+    public Rigidbody rb;
+    private Vector2 direction;
+    public float speed = 5f;
+    public float cameraSpeed = 0.02f;
 
-
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
     }
 
 
     void Update()
     {
-        //curPos = gameObject.transform.position;
-        MovePlayer();
-
-        //curPos.x = Mathf.RoundToInt(curPos.x);
-        //curPos.y = Mathf.RoundToInt(curPos.y);
-
-    }
-    private void MovePlayer()
-    {
-        Mathf.RoundToInt(gameObject.transform.position.x);
-        Mathf.RoundToInt(gameObject.transform.position.y);
-        int horizontal = (int)Input.GetAxisRaw("Horizontal");
-        int vertical = (int)Input.GetAxisRaw("Vertical");
-
-            movementDirection = new Vector2(horizontal, vertical);
-            rb.velocity = movementDirection * playerSpeed;
-
-        Mathf.RoundToInt(gameObject.transform.position.x);
-        Mathf.RoundToInt(gameObject.transform.position.y);
+        if (transform.position.y >= 17)
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 22f, Camera.main.transform.position.z), cameraSpeed);
+        else if (transform.position.y <= 15)
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 9f, Camera.main.transform.position.z), cameraSpeed);
 
 
-        //rb.MovePosition(transform.position + movementDirection * Time.deltaTime * playerSpeed);
-
-
-
-
-        if (player.transform.position.y > boundaryHeight)
+        if (Input.GetKey(KeyCode.W))
         {
-            player.transform.position = new Vector2(pOldPos.x, Mathf.RoundToInt(pOldPos.y));
+            SetDirection(Vector2.up);
         }
-        if (player.transform.position.y < 1)
+        else if (Input.GetKey(KeyCode.S))
         {
-            player.transform.position = new Vector2(pOldPos.x, Mathf.RoundToInt(pOldPos.y));
+            SetDirection(Vector2.down);
         }
-        if (player.transform.position.x > boundaryWeight)
+        else if (Input.GetKey(KeyCode.A))
         {
-            player.transform.position = new Vector2(pOldPos.x, Mathf.RoundToInt(pOldPos.y));
+            SetDirection(Vector2.left);
         }
-        if (player.transform.position.x < 1)
+        else if (Input.GetKey(KeyCode.D))
         {
-            player.transform.position = new Vector2(pOldPos.x, Mathf.RoundToInt(pOldPos.y));
+            SetDirection(Vector2.right);
         }
-        pOldPos = player.transform.position;
+        else
+        {
+            SetDirection(Vector2.zero);
+            gameObject.transform.position = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        }
+        Vector2 position = rb.position;
+        Vector2 translation = direction * speed * Time.deltaTime;
+
+        rb.MovePosition(position + translation);
     }
 
-
-    private void OnTriggerExit(Collider other)
+    private void SetDirection(Vector2 newDirection)
     {
-        if (other.CompareTag("CameraMove"))
-        {
-            if (player.transform.position.x >= 18)
-            {
-                Camera.main.transform.position = new Vector3(21f, Camera.main.transform.position.y, Camera.main.transform.position.z);
-            }
-            if (player.transform.position.x <= 16)
-            {
-                Camera.main.transform.position = new Vector3(8.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
-            }
-        }
+        direction = newDirection;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision coll)
     {
-        if (other.CompareTag("Enemy"))
+        if (coll.collider.CompareTag("Enemy"))
         {
-            Debug.Log("You Died!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

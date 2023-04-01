@@ -14,7 +14,7 @@ public class InstantiateBomb : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bomb, transform.position, Quaternion.identity);
+            Instantiate(bomb, new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y)), Quaternion.identity);
         }
     }
 }

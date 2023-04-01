@@ -5,8 +5,8 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject block;
-    public const int sizeX = 34;
-    const int sizeY = 34;
+    public const int sizeX = 31;
+    const int sizeY = 31;
     
     [SerializeField]
     public Blocks[,] myGrid = new Blocks[sizeX, sizeY];
@@ -73,13 +73,10 @@ public class MapGenerator : MonoBehaviour
         GameObject tmp = Instantiate(block);
         tmp.transform.SetParent(this.transform);
         tmp.transform.localPosition = new Vector3(c, r, 0);
-        //tmp.name = c + " : " + r;
         Blocks blockTmp = tmp.GetComponentInChildren<Blocks>();
 
-        //block.name = " " + myGrid[x, y].type;
         blockTmp.pos = new Vector2(c, r);
         myGrid[c, r] = blockTmp;
-        //tmp.name = " " + myGrid[c,r].type;
     }
 
 }

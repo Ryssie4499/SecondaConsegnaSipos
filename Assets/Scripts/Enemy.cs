@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Mathf.RoundToInt(gameObject.transform.position.x);
-        Mathf.RoundToInt(gameObject.transform.position.y);
         switch (direction)
         {
             case 0:
@@ -33,32 +31,13 @@ public class Enemy : MonoBehaviour
                 rb.velocity = Vector3.left * speed;
                 break;
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player"))
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, rb.velocity, out hit, range)&&hit.transform.name!="Player")
         {
-            RaycastHit hit;
-            //right
-            if (Physics.Raycast(transform.position, transform.right, out hit, range))
-            {
-                direction = Random.Range(0, 2) | 3 ;
-            }
-            //left
-            if (Physics.Raycast(transform.position, -transform.right, out hit, range))
-            {
-                direction = Random.Range(0, 3);
-            }
-            //up
-            if (Physics.Raycast(transform.position, transform.up, out hit, range))
-            {
-                direction = Random.Range(1, 4);
-            }
-            //down
-            if (Physics.Raycast(transform.position, -transform.up, out hit, range))
-            {
-                direction = Random.Range(2, 4)|0;
-            }
+            direction = Random.Range(0, 4);
         }
+        
+       
     }
+   
 }
