@@ -427,6 +427,8 @@ MonoBehaviour:
   speed: 1
   direction: 0
   range: 0.6
+  freeze: 0
+  freezingTime: 10
 --- !u!135 &4857044577734889090
 SphereCollider:
   m_ObjectHideFlags: 0

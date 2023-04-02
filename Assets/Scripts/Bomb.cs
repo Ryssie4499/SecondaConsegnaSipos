@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bomb : MonoBehaviour
 {
@@ -10,19 +11,31 @@ public class Bomb : MonoBehaviour
     private const string Dest = "Destructible";
     private const string P = "PowerUp";
     private const string E = "Enemy";
-    MapGenerator mG;
+    GameManager GM;
     //[SerializeField] LayerMask mask;
     private void Start()
     {
-        mG = FindObjectOfType<MapGenerator>();
+        GM = FindObjectOfType<GameManager>();
     }
     void Update()
     {
+        if (GM.ray == true)
+        {
+            weaponRange = 3;
+            Explosion.transform.localScale = new Vector2(20,20);
+        }
+        else
+        {
+            weaponRange = 1;
+            //Explosion.transform.localScale = new Vector2(1, 1);
+        }
+
         timer += Time.deltaTime;
         if (timer >= 2.2f && timer <= 2.5f)
             Explosion.SetActive(true);
         else
             Explosion.SetActive(false);
+
         if(timer>=2.5f && timer<=2.8f)
         {
             RaycastHit hit;
@@ -31,10 +44,11 @@ public class Bomb : MonoBehaviour
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                    GM.ray = false;
                 }
                 else if(hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("You Died!");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 Debug.DrawRay(transform.position, transform.right * weaponRange, Color.red, 1);
             }
@@ -44,10 +58,11 @@ public class Bomb : MonoBehaviour
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                    GM.ray = false;
                 }
                 else if (hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("You Died!");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 Debug.DrawRay(transform.position, -transform.right * weaponRange, Color.red, 1);
             }
@@ -57,10 +72,11 @@ public class Bomb : MonoBehaviour
                 if (hit.transform.name == E || hit.transform.name == Dest|| hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                    GM.ray = false;
                 }
                 else if (hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("You Died!");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 Debug.DrawRay(transform.position, transform.up * weaponRange, Color.red, 1);
             }
@@ -70,10 +86,11 @@ public class Bomb : MonoBehaviour
                 if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
                 {
                     Destroy(hit.transform.gameObject);
+                    GM.ray = false;
                 }
                 else if (hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("You Died!");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 Debug.DrawRay(transform.position, -transform.up * weaponRange, Color.red, 1);
             }
