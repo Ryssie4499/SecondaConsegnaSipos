@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed;
     public int direction;
     public float range;
-    public float freezingTime = 10f;
-    public float malusTime = 6f;
+    public float freezingTime;
+    public float malusTime;
     Rigidbody rb;
     GameManager GM;
     void Start()
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         if(freezingTime<=0)
         {
             GM.freeze = false;
-            freezingTime = 10f;
+            freezingTime = 5f;
         }
         if (GM.freeze == true && freezingTime>=0)
         {

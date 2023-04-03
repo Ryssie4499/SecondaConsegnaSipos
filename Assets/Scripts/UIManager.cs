@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     {
         if(GM.shield == true)
         {
-            ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 5) * Time.deltaTime;
+            ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 2) * Time.deltaTime;
         }
         if(GM.malus == true)
         {
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
         }
         if(GM.freeze == true)
         {
-            FreezeTimer.fillAmount -= 1 / (e.freezingTime + 5) * Time.deltaTime;
+            FreezeTimer.fillAmount -= 1 / (e.freezingTime + 2) * Time.deltaTime;
         }
         if(GM.ray == false)
         {

@@ -39,7 +39,7 @@ public class PowerUp : MonoBehaviour
             {
                 if (GM.shield == false)
                 {
-                    pM.shieldTimer = 10f;
+                    pM.shieldTimer = 5f;
                     UM.ShieldTimer.fillAmount = 1;
                     GM.shield = true;
                     Destroy(gameObject);
@@ -50,7 +50,7 @@ public class PowerUp : MonoBehaviour
                 if (GM.shield == false)
                 {
                     UM.FreezeTimer.fillAmount = 1;
-                    e.freezingTime = 10f;
+                    e.freezingTime = 5f;
                     GM.freeze = true;
                     Destroy(gameObject);
                 }

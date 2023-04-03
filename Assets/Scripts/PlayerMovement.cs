@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         else if (GM.shield == false)
         {
             c.isTrigger = false;
-            shieldTimer = 10f;
+            shieldTimer = 5f;
         }
 
         if (shieldTimer <= 0)
