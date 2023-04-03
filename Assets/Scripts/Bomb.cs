@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour
 {
     public float timer;
     [SerializeField] GameObject Explosion;
-    [SerializeField] float weaponRange = 1;
+    //[SerializeField] public float weaponRange = 1;
     private const string Dest = "Destructible";
     private const string P = "PowerUp";
     private const string E = "Enemy";
@@ -21,12 +21,12 @@ public class Bomb : MonoBehaviour
     {
         if (GM.ray == true)
         {
-            weaponRange = 3;
+            GM.weaponRange = 3;
             Explosion.transform.localScale = new Vector2(20,20);
         }
         else
         {
-            weaponRange = 1;
+            GM.weaponRange = 1;
             //Explosion.transform.localScale = new Vector2(1, 1);
         }
 
@@ -39,7 +39,7 @@ public class Bomb : MonoBehaviour
         if(timer>=2.5f && timer<=2.8f)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.right, out hit, weaponRange))
+            if (Physics.Raycast(transform.position, transform.right, out hit, GM.weaponRange))
             {
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
@@ -50,10 +50,10 @@ public class Bomb : MonoBehaviour
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
-                Debug.DrawRay(transform.position, transform.right * weaponRange, Color.red, 1);
+                Debug.DrawRay(transform.position, transform.right * GM.weaponRange, Color.red, 1);
             }
 
-            if (Physics.Raycast(transform.position, -transform.right, out hit, weaponRange))
+            if (Physics.Raycast(transform.position, -transform.right, out hit, GM.weaponRange))
             {
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
@@ -64,10 +64,10 @@ public class Bomb : MonoBehaviour
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
-                Debug.DrawRay(transform.position, -transform.right * weaponRange, Color.red, 1);
+                Debug.DrawRay(transform.position, -transform.right * GM.weaponRange, Color.red, 1);
             }
 
-            if (Physics.Raycast(transform.position, transform.up, out hit, weaponRange))
+            if (Physics.Raycast(transform.position, transform.up, out hit, GM.weaponRange))
             {
                 if (hit.transform.name == E || hit.transform.name == Dest|| hit.transform.name == P)
                 {
@@ -78,10 +78,10 @@ public class Bomb : MonoBehaviour
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
-                Debug.DrawRay(transform.position, transform.up * weaponRange, Color.red, 1);
+                Debug.DrawRay(transform.position, transform.up * GM.weaponRange, Color.red, 1);
             }
 
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponRange))
+            if (Physics.Raycast(transform.position, -transform.up, out hit, GM.weaponRange))
             {
                 if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
                 {
@@ -92,7 +92,7 @@ public class Bomb : MonoBehaviour
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
-                Debug.DrawRay(transform.position, -transform.up * weaponRange, Color.red, 1);
+                Debug.DrawRay(transform.position, -transform.up * GM.weaponRange, Color.red, 1);
             }
 
         }

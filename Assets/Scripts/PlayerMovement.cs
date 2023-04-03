@@ -5,30 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float shieldTimer;
     public float speed = 5f;
     public float cameraSpeed = 0.01f;
-    public float shieldTime = 10f;
     private Vector2 direction;
     public Rigidbody rb;
     public Collider c;
     GameManager GM;
+    UIManager UM;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         c = GetComponent<Collider>();
         GM = FindObjectOfType<GameManager>();
+        UM = FindObjectOfType<UIManager>();
     }
-
-
+    
     void Update()
     {
-        if (GM.shield == true)
+        if (GM.shield == true && shieldTimer >= 0)
         {
+            shieldTimer -= Time.deltaTime;
             c.isTrigger = true;
-            StartCoroutine(ShieldTimer());
         }
-        else
+        else if (GM.shield == false)
+        {
             c.isTrigger = false;
+            shieldTimer = 10f;
+        }
+
+        if (shieldTimer <= 0)
+        {
+            GM.shield = false;
+        }
 
         if (transform.position.y >= 17)
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 22f, Camera.main.transform.position.z), cameraSpeed);
@@ -70,16 +79,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll)
     {
-        if (coll.collider.CompareTag("Enemy") && c.isTrigger==false)
+        if (coll.collider.CompareTag("Enemy") && c.isTrigger == false)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    }
-    
-    public IEnumerator ShieldTimer()
-    {
-        yield return new WaitForSeconds(shieldTime);
-        GM.shield = false;
     }
 
 }

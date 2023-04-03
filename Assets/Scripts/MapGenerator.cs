@@ -13,10 +13,10 @@ public class MapGenerator : MonoBehaviour
     
     void Awake()
     {
-        InizializeMatrix();
+        InitializeMatrix();
     }
 
-    void InizializeMatrix()
+    void InitializeMatrix()
     {
         for (int x = 0; x < sizeX; x++)
         {

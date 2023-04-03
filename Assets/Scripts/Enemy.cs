@@ -8,24 +8,29 @@ public class Enemy : MonoBehaviour
     public int direction;
     public float range;
     public float freezingTime = 10f;
+    public float malusTime = 6f;
     Rigidbody rb;
     GameManager GM;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         GM = FindObjectOfType<GameManager>();
+        
         if (GM.freeze == false)
             direction = Random.Range(0, 4);
     }
 
     void Update()
     {
-
-
-        if (GM.freeze == true)
+        if(freezingTime<=0)
+        {
+            GM.freeze = false;
+            freezingTime = 10f;
+        }
+        if (GM.freeze == true && freezingTime>=0)
         {
             rb.velocity = Vector3.zero * 0f;
-            StartCoroutine(TimeOfFreeze());
+            freezingTime -= Time.deltaTime;
         }
         else
         {
@@ -34,40 +39,56 @@ public class Enemy : MonoBehaviour
             {
                 case 0:
                     if (GM.malus == false)
+                    {
                         rb.velocity = Vector3.up * speed;
+                        malusTime = 6f;
+                    }
                     else
                     {
                         rb.velocity = Vector3.up * 4 * speed;
-                        StartCoroutine(TimeMalus());
+                        malusTime -= Time.deltaTime;
                     }
                     break;
                 case 1:
                     if (GM.malus == false)
+                    {
                         rb.velocity = Vector3.down * speed;
+                        malusTime = 6f;
+                    }
                     else
                     {
                         rb.velocity = Vector3.down * 4 * speed;
-                        StartCoroutine(TimeMalus());
+                        malusTime -= Time.deltaTime;
                     }
                     break;
                 case 2:
                     if (GM.malus == false)
+                    {
                         rb.velocity = Vector3.right * speed;
+                        malusTime = 6f;
+                    }
                     else
                     {
                         rb.velocity = Vector3.right * 4 * speed;
-                        StartCoroutine(TimeMalus());
+                        malusTime -= Time.deltaTime;
                     }
                     break;
                 case 3:
                     if (GM.malus == false)
+                    {
                         rb.velocity = Vector3.left * speed;
+                        malusTime = 6f;
+                    }
                     else
                     {
                         rb.velocity = Vector3.left * 4 * speed;
-                        StartCoroutine(TimeMalus());
+                        malusTime -= Time.deltaTime;
                     }
                     break;
+            }
+            if(malusTime<=0)
+            {
+                GM.malus = false;
             }
             RaycastHit hit;
             if (Physics.Raycast(transform.position, rb.velocity, out hit, range) && hit.transform.name != "Player")
@@ -77,15 +98,5 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    IEnumerator TimeOfFreeze()
-    {
-        yield return new WaitForSeconds(freezingTime);
-        GM.freeze = false;
-    }
-    IEnumerator TimeMalus()
-    {
-        yield return new WaitForSeconds(6);
-        GM.malus = false;
-    }
-
+   
 }

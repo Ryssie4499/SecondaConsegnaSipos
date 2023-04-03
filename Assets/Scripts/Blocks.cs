@@ -18,16 +18,6 @@ public class Blocks : MonoBehaviour
     [SerializeField] public BlockType type;
 
     public Color[] blockColors = new Color[enumSize];
-    void Awake()                
-    {
-        //InitializeBlock();
-    }
+    
 
-    //void InitializeBlock()
-    //{
-    //    type = (BlockType)Random.Range(0, 5);
-    //    //ms.material.color = blockColors[(int)type];
-
-    //    //ms.material.color = Color.white;
-    //}
 }

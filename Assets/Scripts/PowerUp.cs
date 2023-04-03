@@ -11,13 +11,17 @@ public enum TypeOfPowerUp
 }
 public class PowerUp : MonoBehaviour
 {
-    Enemy eM;
     public TypeOfPowerUp type;
     GameManager GM;
+    Enemy e;
+    PlayerMovement pM;
+    UIManager UM;
     private void Start()
     {
+        e = FindObjectOfType<Enemy>();
         GM = FindObjectOfType<GameManager>();
-        eM = FindObjectOfType<Enemy>();
+        pM = FindObjectOfType<PlayerMovement>();
+        UM = FindObjectOfType<UIManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,21 +29,43 @@ public class PowerUp : MonoBehaviour
         {
             if (type == TypeOfPowerUp.MaxRay)
             {
-                GM.ray = true;
+                if (GM.shield == false)
+                {
+                    GM.ray = true;
+                    Destroy(gameObject);
+                }
             }
             else if (type == TypeOfPowerUp.Shield)
             {
-                GM.shield = true;
+                if (GM.shield == false)
+                {
+                    pM.shieldTimer = 10f;
+                    UM.ShieldTimer.fillAmount = 1;
+                    GM.shield = true;
+                    Destroy(gameObject);
+                }
             }
-            else if(type == TypeOfPowerUp.EnemyFreeze)
+            else if (type == TypeOfPowerUp.EnemyFreeze)
             {
-                GM.freeze = true;
+                if (GM.shield == false)
+                {
+                    UM.FreezeTimer.fillAmount = 1;
+                    e.freezingTime = 10f;
+                    GM.freeze = true;
+                    Destroy(gameObject);
+                }
             }
-            else if(type == TypeOfPowerUp.EnemyBoost)
+            else if (type == TypeOfPowerUp.EnemyBoost)
             {
-                GM.malus = true;
+                if (GM.shield == false)
+                {
+                    UM.MalusTimer.fillAmount = 1;
+                    e.malusTime = 6f;
+                    GM.malus = true;
+                    Destroy(gameObject);
+                }
             }
-            Destroy(gameObject);
+
         }
     }
 }
