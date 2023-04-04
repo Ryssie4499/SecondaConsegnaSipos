@@ -12,13 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public Collider c;
     GameManager GM;
-    UIManager UM;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         c = GetComponent<Collider>();
         GM = FindObjectOfType<GameManager>();
-        UM = FindObjectOfType<UIManager>();
     }
     
     void Update()
@@ -27,6 +25,16 @@ public class PlayerMovement : MonoBehaviour
         {
             shieldTimer -= Time.deltaTime;
             c.isTrigger = true;
+
+            if (GM.player.position.y > GM.boundaryHeight || GM.player.position.y <= 1)
+            {
+                GM.player.position = new Vector2(GM.pOldPos.x, Mathf.RoundToInt(GM.pOldPos.y));
+            }
+            if (GM.player.position.x > GM.boundaryWidth || GM.player.position.x <= 1)
+            {
+                GM.player.position = new Vector2(Mathf.RoundToInt(GM.pOldPos.x), GM.pOldPos.y);
+            }
+            GM.pOldPos = GM.player.position;
         }
         else if (GM.shield == false)
         {

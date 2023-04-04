@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public Image ShieldTimer;
     public Image FreezeTimer;
     public Image MalusTimer;
+    public Text enemiesDefeated;
     GameManager GM;
     Enemy e;
     PlayerMovement PM;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
+        enemiesDefeated.text = GM.numOfDefeated + "/10";
         if(GM.shield == true)
         {
             ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 2) * Time.deltaTime;

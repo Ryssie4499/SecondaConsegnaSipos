@@ -27,7 +27,6 @@ public class Bomb : MonoBehaviour
         else
         {
             GM.weaponRange = 1;
-            //Explosion.transform.localScale = new Vector2(1, 1);
         }
 
         timer += Time.deltaTime;
@@ -43,6 +42,10 @@ public class Bomb : MonoBehaviour
             {
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
+                    if(hit.transform.name == E)
+                    {
+                        GM.numOfDefeated++;
+                    }
                     Destroy(hit.transform.gameObject);
                     GM.ray = false;
                 }
@@ -57,6 +60,10 @@ public class Bomb : MonoBehaviour
             {
                 if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
                 {
+                    if (hit.transform.name == E)
+                    {
+                        GM.numOfDefeated++;
+                    }
                     Destroy(hit.transform.gameObject);
                     GM.ray = false;
                 }
@@ -71,6 +78,10 @@ public class Bomb : MonoBehaviour
             {
                 if (hit.transform.name == E || hit.transform.name == Dest|| hit.transform.name == P)
                 {
+                    if (hit.transform.name == E)
+                    {
+                        GM.numOfDefeated++;
+                    }
                     Destroy(hit.transform.gameObject);
                     GM.ray = false;
                 }
@@ -85,6 +96,10 @@ public class Bomb : MonoBehaviour
             {
                 if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
                 {
+                    if (hit.transform.name == E)
+                    {
+                        GM.numOfDefeated++;
+                    }
                     Destroy(hit.transform.gameObject);
                     GM.ray = false;
                 }
