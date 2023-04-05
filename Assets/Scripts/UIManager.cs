@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
+    public GameObject StartCanvas;
     public GameObject[] Rays;
     public Image ShieldTimer;
     public Image FreezeTimer;
@@ -22,32 +23,51 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        enemiesDefeated.text = GM.numOfDefeated + "/10";
-        if(GM.shield == true)
+        if(GM.gameStatus == GameStatus.gameStart)
         {
-            ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 2) * Time.deltaTime;
+            StartCanvas.SetActive(true);
         }
-        if(GM.malus == true)
+
+        if (GM.gameStatus == GameStatus.gameRunning)
         {
-            MalusTimer.fillAmount -= 1 / (e.malusTime + 3) * Time.deltaTime;
-        }
-        if(GM.freeze == true)
-        {
-            FreezeTimer.fillAmount -= 1 / (e.freezingTime + 2) * Time.deltaTime;
-        }
-        if(GM.ray == false)
-        {
-            foreach(GameObject ray in Rays)
+            enemiesDefeated.text = GM.numOfDefeated + "/10";
+            if (GM.shield == true)
             {
-                ray.SetActive(false);
+                ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 2) * Time.deltaTime;
             }
-        }
-        else if (GM.ray == true)
-        {
-            foreach (GameObject ray in Rays)
+            if (GM.malus == true)
             {
-                ray.SetActive(true);
+                MalusTimer.fillAmount -= 1 / (e.malusTime + 3) * Time.deltaTime;
             }
+            if (GM.freeze == true)
+            {
+                FreezeTimer.fillAmount -= 1 / (e.freezingTime + 2) * Time.deltaTime;
+            }
+            if (GM.ray == false)
+            {
+                foreach (GameObject ray in Rays)
+                {
+                    ray.SetActive(false);
+                }
+            }
+            else if (GM.ray == true)
+            {
+                foreach (GameObject ray in Rays)
+                {
+                    ray.SetActive(true);
+                }
+            }
+
         }
+    }
+    public void PLAY()
+    {
+        StartCanvas.SetActive(false);
+        GM.gameStatus = GameStatus.gameRunning;
+    }
+
+    public void EXIT()
+    {
+        Application.Quit();
     }
 }

@@ -25,47 +25,50 @@ public class PowerUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (GM.gameStatus == GameStatus.gameRunning)
         {
-            if (type == TypeOfPowerUp.MaxRay)
+            if (other.CompareTag("Player"))
             {
-                if (GM.shield == false)
+                if (type == TypeOfPowerUp.MaxRay)
                 {
-                    GM.ray = true;
-                    Destroy(gameObject);
+                    if (GM.shield == false)
+                    {
+                        GM.ray = true;
+                        Destroy(gameObject);
+                    }
                 }
-            }
-            else if (type == TypeOfPowerUp.Shield)
-            {
-                if (GM.shield == false)
+                else if (type == TypeOfPowerUp.Shield)
                 {
-                    pM.shieldTimer = 5f;
-                    UM.ShieldTimer.fillAmount = 1;
-                    GM.shield = true;
-                    Destroy(gameObject);
+                    if (GM.shield == false)
+                    {
+                        pM.shieldTimer = 5f;
+                        UM.ShieldTimer.fillAmount = 1;
+                        GM.shield = true;
+                        Destroy(gameObject);
+                    }
                 }
-            }
-            else if (type == TypeOfPowerUp.EnemyFreeze)
-            {
-                if (GM.shield == false)
+                else if (type == TypeOfPowerUp.EnemyFreeze)
                 {
-                    UM.FreezeTimer.fillAmount = 1;
-                    e.freezingTime = 5f;
-                    GM.freeze = true;
-                    Destroy(gameObject);
+                    if (GM.shield == false)
+                    {
+                        UM.FreezeTimer.fillAmount = 1;
+                        e.freezingTime = 5f;
+                        GM.freeze = true;
+                        Destroy(gameObject);
+                    }
                 }
-            }
-            else if (type == TypeOfPowerUp.EnemyBoost)
-            {
-                if (GM.shield == false)
+                else if (type == TypeOfPowerUp.EnemyBoost)
                 {
-                    UM.MalusTimer.fillAmount = 1;
-                    e.malusTime = 6f;
-                    GM.malus = true;
-                    Destroy(gameObject);
+                    if (GM.shield == false)
+                    {
+                        UM.MalusTimer.fillAmount = 1;
+                        e.malusTime = 6f;
+                        GM.malus = true;
+                        Destroy(gameObject);
+                    }
                 }
-            }
 
+            }
         }
     }
 }

@@ -5,14 +5,15 @@ using UnityEngine;
 public class InstantiateBomb : MonoBehaviour
 {
     public GameObject bomb;
+    GameManager GM;
     void Start()
     {
-
+        GM = FindObjectOfType<GameManager>();
     }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && GM.gameStatus == GameStatus.gameRunning)
         {
             Instantiate(bomb, new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y)), Quaternion.identity);
         }

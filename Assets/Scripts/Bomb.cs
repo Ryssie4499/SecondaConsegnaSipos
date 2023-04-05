@@ -19,102 +19,105 @@ public class Bomb : MonoBehaviour
     }
     void Update()
     {
-        if (GM.ray == true)
+        if (GM.gameStatus == GameStatus.gameRunning)
         {
-            GM.weaponRange = 3;
-            Explosion.transform.localScale = new Vector2(20,20);
-        }
-        else
-        {
-            GM.weaponRange = 1;
-        }
-
-        timer += Time.deltaTime;
-        if (timer >= 2.2f && timer <= 2.5f)
-            Explosion.SetActive(true);
-        else
-            Explosion.SetActive(false);
-
-        if(timer>=2.5f && timer<=2.8f)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.right, out hit, GM.weaponRange))
+            if (GM.ray == true)
             {
-                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
-                {
-                    if(hit.transform.name == E)
-                    {
-                        GM.numOfDefeated++;
-                    }
-                    Destroy(hit.transform.gameObject);
-                    GM.ray = false;
-                }
-                else if(hit.transform.CompareTag("Player"))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-                Debug.DrawRay(transform.position, transform.right * GM.weaponRange, Color.red, 1);
+                GM.weaponRange = 3;
+                Explosion.transform.localScale = new Vector2(20, 20);
+            }
+            else
+            {
+                GM.weaponRange = 1;
             }
 
-            if (Physics.Raycast(transform.position, -transform.right, out hit, GM.weaponRange))
-            {
-                if(hit.transform.name == E||hit.transform.name == Dest || hit.transform.name == P)
-                {
-                    if (hit.transform.name == E)
-                    {
-                        GM.numOfDefeated++;
-                    }
-                    Destroy(hit.transform.gameObject);
-                    GM.ray = false;
-                }
-                else if (hit.transform.CompareTag("Player"))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-                Debug.DrawRay(transform.position, -transform.right * GM.weaponRange, Color.red, 1);
-            }
+            timer += Time.deltaTime;
+            if (timer >= 2.2f && timer <= 2.5f)
+                Explosion.SetActive(true);
+            else
+                Explosion.SetActive(false);
 
-            if (Physics.Raycast(transform.position, transform.up, out hit, GM.weaponRange))
+            if (timer >= 2.5f && timer <= 2.8f)
             {
-                if (hit.transform.name == E || hit.transform.name == Dest|| hit.transform.name == P)
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.right, out hit, GM.weaponRange))
                 {
-                    if (hit.transform.name == E)
+                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
-                        GM.numOfDefeated++;
+                        if (hit.transform.name == E)
+                        {
+                            GM.numOfDefeated++;
+                        }
+                        Destroy(hit.transform.gameObject);
+                        GM.ray = false;
                     }
-                    Destroy(hit.transform.gameObject);
-                    GM.ray = false;
+                    else if (hit.transform.CompareTag("Player"))
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                    Debug.DrawRay(transform.position, transform.right * GM.weaponRange, Color.red, 1);
                 }
-                else if (hit.transform.CompareTag("Player"))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-                Debug.DrawRay(transform.position, transform.up * GM.weaponRange, Color.red, 1);
-            }
 
-            if (Physics.Raycast(transform.position, -transform.up, out hit, GM.weaponRange))
+                if (Physics.Raycast(transform.position, -transform.right, out hit, GM.weaponRange))
+                {
+                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    {
+                        if (hit.transform.name == E)
+                        {
+                            GM.numOfDefeated++;
+                        }
+                        Destroy(hit.transform.gameObject);
+                        GM.ray = false;
+                    }
+                    else if (hit.transform.CompareTag("Player"))
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                    Debug.DrawRay(transform.position, -transform.right * GM.weaponRange, Color.red, 1);
+                }
+
+                if (Physics.Raycast(transform.position, transform.up, out hit, GM.weaponRange))
+                {
+                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    {
+                        if (hit.transform.name == E)
+                        {
+                            GM.numOfDefeated++;
+                        }
+                        Destroy(hit.transform.gameObject);
+                        GM.ray = false;
+                    }
+                    else if (hit.transform.CompareTag("Player"))
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                    Debug.DrawRay(transform.position, transform.up * GM.weaponRange, Color.red, 1);
+                }
+
+                if (Physics.Raycast(transform.position, -transform.up, out hit, GM.weaponRange))
+                {
+                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    {
+                        if (hit.transform.name == E)
+                        {
+                            GM.numOfDefeated++;
+                        }
+                        Destroy(hit.transform.gameObject);
+                        GM.ray = false;
+                    }
+                    else if (hit.transform.CompareTag("Player"))
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                    Debug.DrawRay(transform.position, -transform.up * GM.weaponRange, Color.red, 1);
+                }
+
+            }
+            else if (timer >= 3f)
             {
-                if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
-                {
-                    if (hit.transform.name == E)
-                    {
-                        GM.numOfDefeated++;
-                    }
-                    Destroy(hit.transform.gameObject);
-                    GM.ray = false;
-                }
-                else if (hit.transform.CompareTag("Player"))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
-                Debug.DrawRay(transform.position, -transform.up * GM.weaponRange, Color.red, 1);
+                Destroy(gameObject);
+                timer = 0;
             }
-
-        }
-        else if(timer>=3f)
-        {
-            Destroy(gameObject);
-            timer = 0;
         }
     }
 }

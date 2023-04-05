@@ -1,8 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+//using UnityEngine.SceneManagement;
+public enum GameStatus
+{
+    gamePaused,
+    gameRunning,
+    gameEnd,
+    gameStart
+}
 public class GameManager : MonoBehaviour
 {
     public Transform player;
@@ -15,11 +21,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool malus;
     [HideInInspector] public float weaponRange = 1f;
     public float numOfDefeated;
+
+    public GameStatus gameStatus = GameStatus.gameRunning;
+
     private void Update()
     {
-        if(numOfDefeated == 10f)
+        if(numOfDefeated == 10f && gameStatus == GameStatus.gameRunning)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            gameStatus = GameStatus.gameEnd;
         }
     }
 
