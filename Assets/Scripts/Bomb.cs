@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Bomb : MonoBehaviour
 {
+    AudioManager AM;
     public float timer;
     [SerializeField] GameObject Explosion;
     private const string Dest = "Destructible";
@@ -12,6 +13,19 @@ public class Bomb : MonoBehaviour
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
+        AM = FindObjectOfType<AudioManager>();
+            AM.explosion.PlayDelayed(2.1f);
+        if (GM.ray == false)
+        {
+            AM.explosion.pitch = 1.4f;
+            AM.explosion.volume = 0.3f;
+        }
+
+        else
+        {
+            AM.explosion.pitch = 0.2f;
+            AM.explosion.volume = 1;
+        }
     }
     void Update()
     {
