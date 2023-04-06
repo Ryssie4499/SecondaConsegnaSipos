@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.SceneManagement;
 public enum GameStatus
 {
     gamePaused,
     gameRunning,
     gameEnd,
-    gameStart
+    gameStart,
+    gameDefeat
 }
 public class GameManager : MonoBehaviour
 {
@@ -19,11 +19,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool shield;
     [HideInInspector] public bool freeze;
     [HideInInspector] public bool malus;
-    [HideInInspector] public float weaponRange = 1f;
+    [HideInInspector] public float weaponRange = 1.2f;
     public float numOfDefeated;
-
-    public GameStatus gameStatus = GameStatus.gameRunning;
-
+    public GameStatus gameStatus;
+    
     private void Update()
     {
         if(numOfDefeated == 10f && gameStatus == GameStatus.gameRunning)
@@ -31,5 +30,4 @@ public class GameManager : MonoBehaviour
             gameStatus = GameStatus.gameEnd;
         }
     }
-
 }

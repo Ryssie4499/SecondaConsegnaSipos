@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class Bomb : MonoBehaviour
 {
     public float timer;
     [SerializeField] GameObject Explosion;
-    //[SerializeField] public float weaponRange = 1;
     private const string Dest = "Destructible";
     private const string P = "PowerUp";
     private const string E = "Enemy";
     GameManager GM;
-    //[SerializeField] LayerMask mask;
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
@@ -28,7 +24,7 @@ public class Bomb : MonoBehaviour
             }
             else
             {
-                GM.weaponRange = 1;
+                GM.weaponRange = 1.2f;
             }
 
             timer += Time.deltaTime;
@@ -42,9 +38,9 @@ public class Bomb : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.right, out hit, GM.weaponRange))
                 {
-                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
-                        if (hit.transform.name == E)
+                        if (hit.transform.tag == E)
                         {
                             GM.numOfDefeated++;
                         }
@@ -53,16 +49,15 @@ public class Bomb : MonoBehaviour
                     }
                     else if (hit.transform.CompareTag("Player"))
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        GM.gameStatus = GameStatus.gameDefeat;
                     }
-                    Debug.DrawRay(transform.position, transform.right * GM.weaponRange, Color.red, 1);
                 }
 
                 if (Physics.Raycast(transform.position, -transform.right, out hit, GM.weaponRange))
                 {
-                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
-                        if (hit.transform.name == E)
+                        if (hit.transform.tag == E)
                         {
                             GM.numOfDefeated++;
                         }
@@ -71,16 +66,15 @@ public class Bomb : MonoBehaviour
                     }
                     else if (hit.transform.CompareTag("Player"))
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        GM.gameStatus = GameStatus.gameDefeat;
                     }
-                    Debug.DrawRay(transform.position, -transform.right * GM.weaponRange, Color.red, 1);
                 }
 
                 if (Physics.Raycast(transform.position, transform.up, out hit, GM.weaponRange))
                 {
-                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
-                        if (hit.transform.name == E)
+                        if (hit.transform.tag == E)
                         {
                             GM.numOfDefeated++;
                         }
@@ -89,16 +83,15 @@ public class Bomb : MonoBehaviour
                     }
                     else if (hit.transform.CompareTag("Player"))
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        GM.gameStatus = GameStatus.gameDefeat;
                     }
-                    Debug.DrawRay(transform.position, transform.up * GM.weaponRange, Color.red, 1);
                 }
 
                 if (Physics.Raycast(transform.position, -transform.up, out hit, GM.weaponRange))
                 {
-                    if (hit.transform.name == E || hit.transform.name == Dest || hit.transform.name == P)
+                    if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
-                        if (hit.transform.name == E)
+                        if (hit.transform.tag == E)
                         {
                             GM.numOfDefeated++;
                         }
@@ -107,11 +100,9 @@ public class Bomb : MonoBehaviour
                     }
                     else if (hit.transform.CompareTag("Player"))
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        GM.gameStatus = GameStatus.gameDefeat;
                     }
-                    Debug.DrawRay(transform.position, -transform.up * GM.weaponRange, Color.red, 1);
                 }
-
             }
             else if (timer >= 3f)
             {

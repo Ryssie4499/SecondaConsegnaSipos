@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (coll.collider.CompareTag("Enemy") && c.isTrigger == false && GM.gameStatus == GameStatus.gameRunning)
         {
-            GM.gameStatus = GameStatus.gameEnd;
+            GM.gameStatus = GameStatus.gameDefeat;
         }
     }
 
