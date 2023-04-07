@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
             if (GM.freeze == true && freezingTime >= 0)
             {
                 rb.velocity = Vector3.zero * 0f;
-                gameObject.transform.position = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+                //gameObject.transform.position = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
                 freezingTime -= Time.deltaTime;
             }
             else

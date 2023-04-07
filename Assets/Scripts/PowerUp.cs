@@ -16,12 +16,14 @@ public class PowerUp : MonoBehaviour
     Enemy e;
     PlayerMovement pM;
     UIManager UM;
+    AudioManager AM;
     private void Start()
     {
         e = FindObjectOfType<Enemy>();
         GM = FindObjectOfType<GameManager>();
         pM = FindObjectOfType<PlayerMovement>();
         UM = FindObjectOfType<UIManager>();
+        AM = FindObjectOfType<AudioManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -33,6 +35,7 @@ public class PowerUp : MonoBehaviour
                 {
                     if (GM.shield == false)
                     {
+                        AM.maxRay.Play();
                         GM.ray = true;
                         Destroy(gameObject);
                     }
@@ -51,6 +54,7 @@ public class PowerUp : MonoBehaviour
                 {
                     if (GM.shield == false)
                     {
+                        AM.freeze.Play();
                         UM.FreezeTimer.fillAmount = 1;
                         e.freezingTime = 5f;
                         GM.freeze = true;
