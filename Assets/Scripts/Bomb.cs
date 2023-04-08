@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour
         if (GM.ray == false)
         {
             AM.explosion.pitch = 1.4f;
-            AM.explosion.volume = 0.3f;
+            AM.explosion.volume = 0.2f;
         }
 
         else

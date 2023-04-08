@@ -17,6 +17,7 @@ public class PowerUp : MonoBehaviour
     PlayerMovement pM;
     UIManager UM;
     AudioManager AM;
+
     private void Start()
     {
         e = FindObjectOfType<Enemy>();
@@ -44,6 +45,7 @@ public class PowerUp : MonoBehaviour
                 {
                     if (GM.shield == false)
                     {
+                        AM.shield.Play();
                         pM.shieldTimer = 5f;
                         UM.ShieldTimer.fillAmount = 1;
                         GM.shield = true;
@@ -65,6 +67,7 @@ public class PowerUp : MonoBehaviour
                 {
                     if (GM.shield == false)
                     {
+                        AM.malus.Play();
                         UM.MalusTimer.fillAmount = 1;
                         e.malusTime = 6f;
                         GM.malus = true;
