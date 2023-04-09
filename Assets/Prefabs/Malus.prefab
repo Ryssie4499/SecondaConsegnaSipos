@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  powerUpAudio: {fileID: 0}
 --- !u!135 &3702605804870145407
 SphereCollider:
   m_ObjectHideFlags: 0

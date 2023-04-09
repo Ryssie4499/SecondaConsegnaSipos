@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class InstantiateBomb : MonoBehaviour
 {
+    [Header("Prefab")]
     public GameObject bomb;
+
+    //References
     GameManager GM;
     void Start()
     {

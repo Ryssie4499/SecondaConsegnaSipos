@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] float speed;
     public int direction;
     public float range;
+
+    [Header("PowerUp")]
     public float freezingTime;
     public float malusTime;
+
+    //References
     Rigidbody rb;
     GameManager GM;
     void Start()
@@ -31,8 +36,7 @@ public class Enemy : MonoBehaviour
             }
             if (GM.freeze == true && freezingTime >= 0)
             {
-                rb.velocity = Vector3.zero * 0f;
-                //gameObject.transform.position = new Vector2(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+                rb.velocity = Vector3.zero;
                 freezingTime -= Time.deltaTime;
             }
             else

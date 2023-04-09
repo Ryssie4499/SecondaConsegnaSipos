@@ -1667,9 +1667,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6656261b16430d4d8eadec1b50cecc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSpeed: 0.01
   shieldTimer: 0
   speed: 6
-  cameraSpeed: 0.01
+  pOldPos: {x: 0, y: 0}
+  boundaryHeight: 29
+  boundaryWidth: 29
   rb: {fileID: 287694840}
   c: {fileID: 0}
 --- !u!135 &287694839
@@ -2462,9 +2465,8 @@ GameObject:
   - component: {fileID: 475186628}
   - component: {fileID: 475186627}
   - component: {fileID: 475186629}
-  - component: {fileID: 475186630}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: _Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2583,7 +2585,7 @@ Transform:
   - {fileID: 359805595}
   - {fileID: 1485054420}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &475186629
 AudioSource:
@@ -2681,23 +2683,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &475186630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475186626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2462b473c7abe843bf0a2604bc3471b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 1320249756}
-  freeze: {fileID: 1788959043}
-  maxRay: {fileID: 274819608}
-  malus: {fileID: 359805596}
-  shield: {fileID: 1485054421}
 --- !u!1 &513764480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2869,6 +2854,10 @@ PrefabInstance:
       propertyPath: sR
       value: 
       objectReference: {fileID: 288115222}
+    - target: {fileID: 8245120999925735070, guid: f07b1e4c27470f84f856e859de673441, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 1485054421}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f07b1e4c27470f84f856e859de673441, type: 3}
 --- !u!1 &546698079
@@ -3109,6 +3098,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (3)
@@ -3407,6 +3400,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PU
       objectReference: {fileID: 0}
+    - target: {fileID: 3702605804870145404, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 1788959043}
     - target: {fileID: 3702605804870145406, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3546,6 +3543,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (6)
@@ -4408,6 +4409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Malus
       objectReference: {fileID: 0}
+    - target: {fileID: 3702605804870145404, guid: 0a5a53c511b046643b616b42697587ea, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 359805596}
     - target: {fileID: 3702605804870145406, guid: 0a5a53c511b046643b616b42697587ea, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4555,6 +4560,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PU
       objectReference: {fileID: 0}
+    - target: {fileID: 3702605804870145404, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 1788959043}
     - target: {fileID: 3702605804870145406, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5567,6 +5576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (4)
@@ -5628,6 +5641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Malus (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3702605804870145404, guid: 0a5a53c511b046643b616b42697587ea, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 359805596}
     - target: {fileID: 3702605804870145406, guid: 0a5a53c511b046643b616b42697587ea, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6242,10 +6259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5874323609408d4e9b5fa0bbe5e9088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 287694837}
-  boundaryHeight: 29
-  boundaryWidth: 29
-  pOldPos: {x: 0, y: 0}
   ray: 0
   shield: 0
   freeze: 0
@@ -6265,7 +6278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584644312
 GameObject:
@@ -6331,7 +6344,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1608764078
 GameObject:
@@ -7578,6 +7591,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (2)
@@ -8149,6 +8166,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (5)
@@ -8581,7 +8602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2061247212 stripped
 Transform:
@@ -8820,6 +8841,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay (1)
@@ -8885,6 +8910,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PU
       objectReference: {fileID: 0}
+    - target: {fileID: 3702605804870145404, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 1788959043}
     - target: {fileID: 3702605804870145406, guid: fd33b2925269d7f43a5b155ce24c1bad, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8990,6 +9019,10 @@ PrefabInstance:
       propertyPath: sR
       value: 
       objectReference: {fileID: 288115222}
+    - target: {fileID: 8245120999925735070, guid: f07b1e4c27470f84f856e859de673441, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 1485054421}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f07b1e4c27470f84f856e859de673441, type: 3}
 --- !u!1001 &6964787051362894483
@@ -8999,6 +9032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937478725}
     m_Modifications:
+    - target: {fileID: -2024576589783836967, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
+      propertyPath: powerUpAudio
+      value: 
+      objectReference: {fileID: 274819608}
     - target: {fileID: 6964787053114735500, guid: 7e6a15ded2a4a6340b997dc08fe09075, type: 3}
       propertyPath: m_Name
       value: MaxRay

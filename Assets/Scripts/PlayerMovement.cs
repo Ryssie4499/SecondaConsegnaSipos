@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Camera")]
+    public float cameraSpeed = 0.01f;
+
+    [Header("Player")]
     public float shieldTimer;
     public float speed = 5f;
-    public float cameraSpeed = 0.01f;
     private Vector2 direction;
-    public Rigidbody rb;
-    public Collider c;
+    [HideInInspector] public Vector2 pOldPos;
+
+    [Header("Map")]
+    public float boundaryHeight;
+    public float boundaryWidth;
+
+    //References
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public Collider c;
     GameManager GM;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,15 +39,15 @@ public class PlayerMovement : MonoBehaviour
                 shieldTimer -= Time.deltaTime;
                 c.isTrigger = true;
 
-                if (GM.player.position.y > GM.boundaryHeight || GM.player.position.y <= 1)
+                if (transform.position.y > boundaryHeight || transform.position.y <= 1)
                 {
-                    GM.player.position = new Vector2(GM.pOldPos.x, Mathf.RoundToInt(GM.pOldPos.y));
+                    transform.position = new Vector2(pOldPos.x, Mathf.RoundToInt(pOldPos.y));
                 }
-                if (GM.player.position.x > GM.boundaryWidth || GM.player.position.x <= 1)
+                if (transform.position.x > boundaryWidth || transform.position.x <= 1)
                 {
-                    GM.player.position = new Vector2(Mathf.RoundToInt(GM.pOldPos.x), GM.pOldPos.y);
+                    transform.position = new Vector2(Mathf.RoundToInt(pOldPos.x), pOldPos.y);
                 }
-                GM.pOldPos = GM.player.position;
+                pOldPos = transform.position;
             }
             else if (GM.shield == false)
             {
@@ -81,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
             rb.MovePosition(position + translation);
         }
-
     }
 
     private void SetDirection(Vector2 newDirection)

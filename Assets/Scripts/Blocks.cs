@@ -10,13 +10,12 @@ public enum BlockType
 }
 public class Blocks : MonoBehaviour
 {
-    const int enumSize = 3;
-    public Vector2 pos;
+    [Header("Block Color")]
     public MeshRenderer ms;
-
-    [SerializeField] public BlockType type;
-
     public Color[] blockColors = new Color[enumSize];
-    
 
+    [Header("Block Position & Type")]
+    public Vector2 pos;
+    public BlockType type;
+    const int enumSize = 3;
 }

@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class UIManager : MonoBehaviour
 {
+    [Header("Canvas")]
     public GameObject StartCanvas;
     public GameObject EndCanvas;
     public GameObject DefeatCanvas;
     public GameObject PauseCanvas;
+
+    [Header("In Game UI")]
     public GameObject[] Rays;
     public Image ShieldTimer;
     public Image FreezeTimer;
     public Image MalusTimer;
     public Text enemiesDefeated;
+
+    //References
     GameManager GM;
     Enemy e;
     PlayerMovement PM;
+
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject block;
+    [Header("Matrix")]
     public const int sizeX = 31;
     const int sizeY = 31;
-    
-    [SerializeField]
+
+    [Header("Blocks")]
+    public GameObject block;
     public Blocks[,] myGrid = new Blocks[sizeX, sizeY];
     
     void Awake()

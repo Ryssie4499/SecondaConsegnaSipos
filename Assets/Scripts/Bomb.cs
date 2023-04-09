@@ -1,30 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Bomb : MonoBehaviour
 {
-    AudioManager AM;
-    public float timer;
+    [Header("Audio")]
+    public AudioSource explosion;
+
+    [Header("Prefab")]
     [SerializeField] GameObject Explosion;
+
+    [HideInInspector] public float timer;
+    [HideInInspector] public float weaponRange = 1.2f;
+
     private const string Dest = "Destructible";
     private const string P = "PowerUp";
     private const string E = "Enemy";
+
+    //References
     GameManager GM;
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
-        AM = FindObjectOfType<AudioManager>();
-            AM.explosion.PlayDelayed(2.1f);
+
+        explosion.PlayDelayed(2.1f);
         if (GM.ray == false)
         {
-            AM.explosion.pitch = 1.4f;
-            AM.explosion.volume = 0.2f;
+            explosion.pitch = 1.4f;
+            explosion.volume = 0.2f;
         }
 
         else
         {
-            AM.explosion.pitch = 0.2f;
-            AM.explosion.volume = 1;
+            explosion.pitch = 0.2f;
+            explosion.volume = 1;
         }
     }
     void Update()
@@ -33,12 +42,12 @@ public class Bomb : MonoBehaviour
         {
             if (GM.ray == true)
             {
-                GM.weaponRange = 3;
+                weaponRange = 3;
                 Explosion.transform.localScale = new Vector2(20, 20);
             }
             else
             {
-                GM.weaponRange = 1.2f;
+                weaponRange = 1.2f;
             }
 
             timer += Time.deltaTime;
@@ -50,7 +59,7 @@ public class Bomb : MonoBehaviour
             if (timer >= 2.5f && timer <= 2.8f)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.right, out hit, GM.weaponRange))
+                if (Physics.Raycast(transform.position, transform.right, out hit, weaponRange))
                 {
                     if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
@@ -67,7 +76,7 @@ public class Bomb : MonoBehaviour
                     }
                 }
 
-                if (Physics.Raycast(transform.position, -transform.right, out hit, GM.weaponRange))
+                if (Physics.Raycast(transform.position, -transform.right, out hit, weaponRange))
                 {
                     if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
@@ -84,7 +93,7 @@ public class Bomb : MonoBehaviour
                     }
                 }
 
-                if (Physics.Raycast(transform.position, transform.up, out hit, GM.weaponRange))
+                if (Physics.Raycast(transform.position, transform.up, out hit, weaponRange))
                 {
                     if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
@@ -101,7 +110,7 @@ public class Bomb : MonoBehaviour
                     }
                 }
 
-                if (Physics.Raycast(transform.position, -transform.up, out hit, GM.weaponRange))
+                if (Physics.Raycast(transform.position, -transform.up, out hit, weaponRange))
                 {
                     if (hit.transform.tag == E || hit.transform.name == Dest || hit.transform.name == P)
                     {
