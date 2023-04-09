@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//creo un enum dei tipi di powerUp disponibili sulla mappa
 public enum TypeOfPowerUp
 {
-    MaxRay,
-    Shield,
-    EnemyFreeze,
-    EnemyBoost
+    MaxRay,         //se si tratta di un MaxRay, appena raccolto, aumenterà il raggio della bomba appena piazzata o ancora da piazzare finchè non colpirai un blocco distruttibile o un nemico
+    Shield,         //se raccogli uno shield, puoi attraversare qualunque parete tranne i contorni della mappa e attraversare i nemici senza essere ucciso, ma non sarà possibile raccogliere i powerUp ancora nascosti
+    EnemyFreeze,    //il freeze blocca i nemici per qualche secondo, permettendoti di avvicinarti a loro o di scappare prima che ti uccidano
+    EnemyBoost      //è l'unico tipo di malus presente in mappa e aumenta la velocità dei nemici per qualche secondo
 }
 public class PowerUp : MonoBehaviour
 {
     [Header("Audio")]
-    public AudioSource powerUpAudio;
+    public AudioSource powerUpAudio;    //sarà possibile da inspector inserire l'audio più appropriato al tipo di powerUp
 
     [Header("PowerUp Type")]
-    public TypeOfPowerUp type;
+    public TypeOfPowerUp type;          //sia da inspector che da altre classi è possibile impostare il tipo di powerUp in questione
 
     //References
-    GameManager GM;
-    UIManager UM;
+    GameManager GM;                     //dal gameManager necessito di poter accedere allo status di gioco e alle booleane che segnalano l'attività di un powerUp
+    UIManager UM;                       //lo UIManager mi serve per gestire il fill momentaneo dei timer dei powerUp
 
+    //recupero gli script per poter richiamare le loro variabili
     private void Start()
     {
         GM = FindObjectOfType<GameManager>();
@@ -28,35 +30,36 @@ public class PowerUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (GM.gameStatus == GameStatus.gameRunning && other.CompareTag("Player") && GM.shield == false)
+        if (GM.gameStatus == GameStatus.gameRunning && other.CompareTag("Player") && GM.shield == false)    //quando il player entra nel trigger dei powerUp, lo shield non è ancora attivo e lo status di gioco è in running...
         {
-            if (type == TypeOfPowerUp.MaxRay)
+            if (type == TypeOfPowerUp.MaxRay)       //se il tipo di powerUp raccolto è un MaxRay...
             {
-                powerUpAudio.Play();
-                GM.ray = true;
-                Destroy(gameObject);
+                powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
+                GM.ray = true;                      //la booleana diventa true
+                Destroy(gameObject);                //e il powerUp si auto-distrugge
             }
-            else if (type == TypeOfPowerUp.Shield)
+            else if (type == TypeOfPowerUp.Shield)  //se il tipo di powerUp raccolto è uno scudo e prima non ne possedevo uno...
             {
-                powerUpAudio.Play();
-                UM.ShieldTimer.fillAmount = 1;
-                GM.shield = true;
-                Destroy(gameObject);
+                powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
+                UM.ShieldTimer.fillAmount = 1;      //il fill del timer si setta al massimo prima di scendere
+                GM.shield = true;                   //la booleana diventa true
+                Destroy(gameObject);                //e il powerUp si auto-distrugge
             }
             else if (type == TypeOfPowerUp.EnemyFreeze)
             {
-                powerUpAudio.Play();
-                UM.FreezeTimer.fillAmount = 1;
-                GM.freeze = true;
-                Destroy(gameObject);
+                powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
+                UM.FreezeTimer.fillAmount = 1;      //il fill del timer si setta al massimo prima di scendere
+                GM.freeze = true;                   //la booleana diventa true
+                Destroy(gameObject);                //e il powerUp si auto-distrugge
             }
             else if (type == TypeOfPowerUp.EnemyBoost)
             {
-                powerUpAudio.Play();
-                UM.MalusTimer.fillAmount = 1;
-                GM.malus = true;
-                Destroy(gameObject);
+                powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
+                UM.MalusTimer.fillAmount = 1;       //il fill del timer si setta al massimo prima di scendere
+                GM.malus = true;                    //la booleana diventa true
+                Destroy(gameObject);                //e il powerUp si auto-distrugge
             }
         }
+        //se lo shield è già attivo, anche entrando nel trigger degli altri powerUp, non li si raccoglierebbe e non si otterrebbero i loro benefici
     }
 }
