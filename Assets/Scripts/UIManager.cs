@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
     public Image FreezeTimer;           //il timer del freeze
     public Image MalusTimer;            //il timer del malus
     public Text enemiesDefeated;        //il contatore di nemici sconfitti che si aggiorna quando una bomba colpisce un nemico
+    public Text shieldCollected;        //il contatore di scudi raccolti
+    public Text malusCollected;        //il contatore di malus raccolti
+    public Text freezeCollected;        //il contatore di freeze raccolti
+    public Text maxRayCollected;        //il contatore di maxRay raccolti
 
     //References
     GameManager GM;                     //ricerco il numero di nemici sconfitti e lo status di gioco
@@ -40,6 +44,11 @@ public class UIManager : MonoBehaviour
         if (GM.gameStatus == GameStatus.gameRunning)    //se il gioco è iniziato
         {
             enemiesDefeated.text = GM.numOfDefeated + "/10";                            //il numero di nemici sconfitti si aggiorna in runtime su dieci totali
+            shieldCollected.text = GM.shieldNum + "/2";                                 //il numero di scudi raccolti si aggiorna in runtime su dieci totali
+            malusCollected.text = GM.malusNum + "/2";                                   //il numero di malus raccolti si aggiorna in runtime su dieci totali
+            freezeCollected.text = GM.freezeNum + "/3";                                 //il numero di freeze raccolti si aggiorna in runtime su dieci totali
+            maxRayCollected.text = GM.maxRayNum + "/7";                                 //il numero di raggi aumentati raccolti si aggiorna in runtime su dieci totali
+
             if (GM.shield == true)                                                      //e se lo scudo è attivo
             {
                 ShieldTimer.fillAmount -= 1 / (PM.shieldTimer + 2) * Time.deltaTime;    //il suo timer (UI) si svuota nel tempo (ho dovuto aggiungere una costante al timer perchè finiva leggermente prima della fine del bonus
@@ -50,7 +59,7 @@ public class UIManager : MonoBehaviour
             }
             if (GM.freeze == true)                                                      //se il freeze è attivo
             {
-                FreezeTimer.fillAmount -= 1 / (e.freezingTime + 2) * Time.deltaTime;    //il suo timer (UI) si svuota nel tempo (ho dovuto aggiungere una costante al timer perchè finiva leggermente prima della fine del bonus
+                FreezeTimer.fillAmount -= 1 / (e.freezingTime + 4) * Time.deltaTime;    //il suo timer (UI) si svuota nel tempo (ho dovuto aggiungere una costante al timer perchè finiva leggermente prima della fine del bonus
             }
             if (GM.ray == false)                                                        //se il raggio non è ancora aumentato
             {

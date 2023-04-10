@@ -19,8 +19,8 @@ public class PowerUp : MonoBehaviour
     public TypeOfPowerUp type;          //sia da inspector che da altre classi è possibile impostare il tipo di powerUp in questione
 
     //References
-    GameManager GM;                     //dal gameManager necessito di poter accedere allo status di gioco e alle booleane che segnalano l'attività di un powerUp
-    UIManager UM;                       //lo UIManager mi serve per gestire il fill momentaneo dei timer dei powerUp
+    GameManager GM;                     //dal gameManager necessito di poter accedere allo status di gioco, per gestire il conteggio dei powerUp e alle booleane che segnalano l'attività di un powerUp
+    UIManager UM;                       //lo UIManager mi serve per gestire il fill momentaneo dei timer dei powerUp e per aggiornare il conteggio dei powerUp
 
     //recupero gli script per poter richiamare le loro variabili
     private void Start()
@@ -34,12 +34,14 @@ public class PowerUp : MonoBehaviour
         {
             if (type == TypeOfPowerUp.MaxRay)       //se il tipo di powerUp raccolto è un MaxRay...
             {
+                GM.maxRayNum++;
                 powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
                 GM.ray = true;                      //la booleana diventa true
                 Destroy(gameObject);                //e il powerUp si auto-distrugge
             }
             else if (type == TypeOfPowerUp.Shield)  //se il tipo di powerUp raccolto è uno scudo e prima non ne possedevo uno...
             {
+                GM.shieldNum++;
                 powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
                 UM.ShieldTimer.fillAmount = 1;      //il fill del timer si setta al massimo prima di scendere
                 GM.shield = true;                   //la booleana diventa true
@@ -47,6 +49,7 @@ public class PowerUp : MonoBehaviour
             }
             else if (type == TypeOfPowerUp.EnemyFreeze)
             {
+                GM.freezeNum++;
                 powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
                 UM.FreezeTimer.fillAmount = 1;      //il fill del timer si setta al massimo prima di scendere
                 GM.freeze = true;                   //la booleana diventa true
@@ -54,6 +57,7 @@ public class PowerUp : MonoBehaviour
             }
             else if (type == TypeOfPowerUp.EnemyBoost)
             {
+                GM.malusNum++;
                 powerUpAudio.Play();                //attivo la traccia audio assegnata da inspector
                 UM.MalusTimer.fillAmount = 1;       //il fill del timer si setta al massimo prima di scendere
                 GM.malus = true;                    //la booleana diventa true

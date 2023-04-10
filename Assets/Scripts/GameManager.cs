@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool shield;   //shield è il powerUp che ti permette di attraversare ogni parete e nemico senza subire danno. L'unico tipo di blocco non superabile è il boundary.
     [HideInInspector] public bool freeze;   //freeze blocca temporaneamente i nemici, permettendoti di raggiungere un powerUp, scappare o piazzare una bomba vicino al nemico.
     [HideInInspector] public bool malus;    //l'unico malus del gioco è un boost per i nemici. La loro velocità aumenta temporaneamente.
-    
+    [HideInInspector] public int shieldNum; //il numero di shield raccolti
+    [HideInInspector] public int freezeNum; //il numero di freeze raccolti
+    [HideInInspector] public int malusNum;  //il numero di malus raccolti
+    [HideInInspector] public int maxRayNum; //il numero di maxRay raccolti
+
     [Header("Status")]
     public GameStatus gameStatus;   //da Inspector e dalle altre classi sarà possibile modificare manualmente lo status di gioco in determinate situazioni.
 
