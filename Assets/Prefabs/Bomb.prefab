@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 8130045826782997425}
+  exp: {fileID: 8300000, guid: f01c623f724825e44a923d1ae50256f2, type: 3}
   Explosion: {fileID: 6764968946173847517}
 --- !u!1 &5358529662363492626
 GameObject:

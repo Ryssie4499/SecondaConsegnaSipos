@@ -22,7 +22,6 @@ public class Bomb : MonoBehaviour
     {
         GM = FindObjectOfType<GameManager>();
 
-        explosion.PlayDelayed(2.1f);            //ritardo l'inizio della traccia acustica dell'esplosione a quando effettivamente esplode la bomba
         if (GM.ray == false)                    //se il raggio aumentato è inattivo il pitch della sua traccia acustica è più alto e il volume è più basso
         {
             explosion.pitch = 1.4f;
@@ -57,6 +56,11 @@ public class Bomb : MonoBehaviour
             else
             {
                 Explosion.SetActive(false);                     //in ogni altro momento, rimane/viene disattivata
+            }
+        
+            if(timer >= 2.2f && timer <= 2.22f)                 //ritardo l'inizio della traccia acustica dell'esplosione a quando effettivamente esplode la bomba
+            {
+                explosion.Play();
             }
 
             if (timer >= 2.5f && timer <= 2.8f)                 //se il timer ha già superato l'esplosione, ha meno di un secondo per distruggere i blocchi o i nemici
